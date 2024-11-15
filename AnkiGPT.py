@@ -30,14 +30,14 @@ def generate_anki_flashcards(text, chunk_size, api_key, model_choice):
                 {"role": "user", "content": f"Create Anki flashcards with the provided text using a format: question;answer. Keep the question and the corresponding answer on the same line {chunk}"}
                 ]
 
-        api_response = openai.ChatCompletion.create(
+        api_response = openai.ChatCompletion.create_chat_completion(
             model=model_choice,
             messages=message_prompt,
             temperature=0.2,
             max_tokens=2048
         )
 
-        flashcards += api_response['choices'][0]['message']['content']
+        flashcards += api_response.choices[0].message.content
 
         if i == 0:
             break
